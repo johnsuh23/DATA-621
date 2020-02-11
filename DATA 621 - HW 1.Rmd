@@ -1,0 +1,13 @@
+---
+title: "DATA 621 - HW 1"
+output: html_document
+---
+
+```{r}
+library 
+
+moneyball_training <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-evaluation-data.csv"), header =TRUE)
+
+head(moneyball_training, 10)
+```
+
