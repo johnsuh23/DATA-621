@@ -6,8 +6,11 @@ output: html_document
 ```{r}
 library 
 
-moneyball_training <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-evaluation-data.csv"), header =TRUE)
-
+moneyball_training <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-training-data.csv"), header =TRUE)
 head(moneyball_training, 10)
+
+moneyball_evaluation <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-evaluation-data.csv"), header =TRUE)
+
+head(moneyball_evaluation, 10)
 ```
 
