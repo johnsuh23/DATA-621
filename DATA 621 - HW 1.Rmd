@@ -4,18 +4,31 @@ output: html_document
 ---
 
 ```{r}
+library(tidyverse)
+library(corrplot)
+library(caret)
 moneyball_training <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-training-data.csv"), header =TRUE)
 head(moneyball_training, 5)
 summary(moneyball_training)
-df1 <- moneyball_training[-1]
-#remove first column called index
-head(df1, 5)
-
 moneyball_evaluation <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-evaluation-data.csv"), header =TRUE)
 head(moneyball_evaluation, 5)
 summary(moneyball_evaluation)
-df1 <- moneyball_evaluation[-1]
-#remove first column called index
-head(df1, 5)
+moneyball_training %>%gather(variable, value, TARGET_WINS:TEAM_FIELDING_DP) %>%ggplot(., aes(value)) + geom_density(fill = "indianred4", color="indianred4") + facet_wrap(~variable, scales ="free", ncol = 4) +labs(x = element_blank(), y = element_blank())
+moneyball_training %>% cor(., use = "complete.obs") %>%corrplot(., method = "color", type = "upper", tl.col = "black", diag = FALSE)
+moneyball_training %>%gather(variable, value, -TARGET_WINS) %>%
+ggplot(., aes(value, TARGET_WINS)) + geom_point(fill = "indianred4", color="indianred4") + geom_smooth(method = "lm", se = FALSE, color = "black") + facet_wrap(~variable, scales ="free", ncol = 4) + labs(x = element_blank(), y = "Wins")
+
+train_index <- createDataPartition(moneyball_training$TARGET_WINS, p = .7, list = FALSE, times = 1)
+moneyball_train <- moneyball_training[train_index,]
+moneyball_test <- moneyball_evaluation[-train_index,]
+
+x<- lm(TARGET_WINS ~ ., moneyball_train)
+summary(x)
+
+x2 <- lm(TARGET_WINS ~ TEAM_BATTING_H + TEAM_BATTING_HR, data = moneyball_train)
+summary(x2)
+
+x3 <- lm(TARGET_WINS ~ TEAM_BATTING_HR, data = moneyball_train)
+summary(x3)
 ```
 
