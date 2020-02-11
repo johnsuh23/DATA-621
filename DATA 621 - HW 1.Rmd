@@ -4,13 +4,18 @@ output: html_document
 ---
 
 ```{r}
-library 
-
 moneyball_training <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-training-data.csv"), header =TRUE)
-head(moneyball_training, 10)
+head(moneyball_training, 5)
+summary(moneyball_training)
+df1 <- moneyball_training[-1]
+#remove first column called index
+head(df1, 5)
 
 moneyball_evaluation <- read.csv(url("https://raw.githubusercontent.com/johnsuh23/DATA-621/master/moneyball-evaluation-data.csv"), header =TRUE)
-
-head(moneyball_evaluation, 10)
+head(moneyball_evaluation, 5)
+summary(moneyball_evaluation)
+df1 <- moneyball_evaluation[-1]
+#remove first column called index
+head(df1, 5)
 ```
 
