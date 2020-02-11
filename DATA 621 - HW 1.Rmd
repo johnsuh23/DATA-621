@@ -14,7 +14,7 @@ moneyball_evaluation <- read.csv(url("https://raw.githubusercontent.com/johnsuh2
 head(moneyball_evaluation, 5)
 summary(moneyball_evaluation)
 
-#CODE taken from https://rpubs.com/lysanthus/DATA621HW1
+#CODE taken from https://rpubs.com/lysanthus/DATA621HW1#
 
 moneyball_training %>%gather(variable, value, TARGET_WINS:TEAM_FIELDING_DP) %>%ggplot(., aes(value)) + geom_density(fill = "indianred4", color="indianred4") + facet_wrap(~variable, scales ="free", ncol = 4) +labs(x = element_blank(), y = element_blank())
 moneyball_training %>% cor(., use = "complete.obs") %>%corrplot(., method = "color", type = "upper", tl.col = "black", diag = FALSE)
